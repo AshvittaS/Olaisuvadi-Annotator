@@ -17,10 +17,6 @@ exports/*
 annotations/*
 !annotations/.gitkeep
 
-# Model weights - large binaries; distribute via GitHub Releases instead
-weights/*.pt
-weights/*.pth
-weights/*.onnx
 
 # Local-only tools (not part of the annotator)
 correcting.html
