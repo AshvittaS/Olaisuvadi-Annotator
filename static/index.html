@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ta"><head><meta charset="utf-8"><title>ஓலைச்சுவடி annotator</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css?v=13"></head><body>
+<header>
+  <label class="btn">Open image<input id="file" type="file" accept=".jpg,.jpeg,.png" hidden></label>
+  <button id="add">Add (N)</button><button id="del">Delete</button>
+  <button id="undo">Undo</button><button id="redo">Redo</button>
+  <button id="fit">Fit</button><button id="one">100%</button>
+  <label>Confidence ≥ <input id="thr" type="range" min="0" max="100" value="0"> <b id="thrv">0.00</b></label>
+  <button id="rerun">Re-run model</button>
+  <button id="manageLabelBtn" title="Add / rename / delete labels">🏷 Labels</button>
+  <button id="save" class="primary">Save (Ctrl+S)</button><button id="export">Export all</button><button id="downloadJson" title="Download JSON for current image">⬇ Download JSON</button>
+  <span id="info"></span>
+</header>
+<div id="warn" hidden></div>
+<main>
+  <div id="wrap"><canvas id="cv"></canvas><input id="hs" type="range" min="0" max="1000" value="0" title="Scroll horizontally"></div>
+  <aside>
+    <h3>Boxes <span id="count"></span></h3>
+    <div id="list"></div>
+  </aside>
+</main>
+
+<!-- ── Floating label picker (search / add-new) ── -->
+<div id="picker" hidden>
+  <input id="pin" type="text" placeholder="Search Tamil or type English (e.g. ka, tha)…" autocomplete="off">
+  <ul id="plist"></ul>
+</div>
+
+<!-- ── Manage Labels modal ── -->
+<div id="labelModal" class="modal-overlay" hidden>
+  <div class="modal-box" id="labelModalBox">
+    <div class="modal-header">
+      <h2>🏷 Manage Labels</h2>
+      <button id="closeLabelModal" class="modal-close" title="Close">✕</button>
+    </div>
+
+    <!-- Add new label -->
+    <div class="modal-section">
+      <label class="modal-label">Add new label</label>
+      <div class="modal-row">
+        <input id="newLabelInput" type="text" placeholder="Type a new label…" autocomplete="off">
+        <button id="addLabelBtn" class="primary">Add</button>
+      </div>
+    </div>
+
+    <!-- Rename selected box label shortcut -->
+    <div class="modal-section" id="renameSection">
+      <label class="modal-label">Rename selected box label</label>
+      <div class="modal-row">
+        <span id="curLabelDisplay" class="cur-label">—</span>
+        <span style="opacity:.5;padding:0 6px">→</span>
+        <input id="renameLabelInput" type="text" placeholder="New label…" autocomplete="off">
+        <button id="renameLabelBtn" class="primary">Rename</button>
+      </div>
+    </div>
+
+    <!-- Full label list -->
+    <div class="modal-section" style="flex:1;min-height:0;display:flex;flex-direction:column">
+      <div class="modal-label-row">
+        <label class="modal-label">All labels <span id="labelCount"></span></label>
+        <input id="filterLabels" type="text" placeholder="Filter…" autocomplete="off" style="margin-left:auto;width:120px">
+      </div>
+      <ul id="labelList"></ul>
+    </div>
+  </div>
+</div>
+
+<!-- ── Inline rename tooltip on sidebar rows ── -->
+<div id="inlineRename" hidden>
+  <input id="inlineInput" type="text" autocomplete="off">
+  <button id="inlineOk">✓</button>
+  <button id="inlineCancel">✕</button>
+</div>
+
+<div id="toast"></div>
+<script src="/static/app.js?v=13"></script>
+</body></html>
