@@ -102,8 +102,13 @@ pip install -r requirements.txt
 
 > ⏳ This downloads PyTorch, so the first install can take several minutes.
 
-**4. (Optional) Add the AI model.** Put your trained model file at `weights/best.pt`.
-Model files aren't stored in this repository. Without one, the tool still works and you draw the boxes yourself.
+**4. The AI model.** A trained model is included at `weights/best.pt`, so boxes are suggested
+as soon as you open an image. To use your own model, replace that file. Without a model,
+the tool still works and you draw the boxes yourself.
+
+> ⚠️ **Limited model:** the included weights come from a small amount of training on
+> **Thirukkural palm-leaf manuscripts** only. Expect weaker results on other manuscripts,
+> scripts or handwriting styles. Check every box, and retrain on your own data for better accuracy.
 
 ---
 
@@ -226,8 +231,8 @@ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 <details>
 <summary><b>An orange bar says "weights/best.pt not found"</b></summary>
 
-The model file is missing, so no boxes are suggested. Put your model at `weights/best.pt`,
-or keep going and draw the boxes yourself.
+The model file is missing, so no boxes are suggested. Make sure `weights/best.pt` exists
+(it's included in this repository), or keep going and draw the boxes yourself.
 </details>
 
 <details>
@@ -257,7 +262,7 @@ check_model.py    Quick test that weights/best.pt loads and predicts
 labels.json       Tamil label list used by the picker
 start.bat         One-click launcher for Windows
 static/           The editor (index.html, app.js, style.css)
-weights/          Put best.pt here (not tracked by git)
+weights/best.pt   Included model (limited training on Thirukkural palm leaves)
 docs/images/      Screenshots for this README
 ```
 
